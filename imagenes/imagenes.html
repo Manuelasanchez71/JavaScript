@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagenes</title>
+</head>
+<body>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+        flex-direction: column;
+    }
+    
+    .images-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 80%; /* Puedes ajustar este valor según sea necesario */
+    }
+    
+    .images-container img {
+        width: 48%; /* Ajusta este valor para controlar el espacio entre las imágenes */
+    }
+    
+    button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const body = document.body;
+        
+        // Crear contenedor de imágenes
+        const imagesContainer = document.createElement('div');
+        imagesContainer.classList.add('images-container');
+        
+        const img1 = document.createElement('img');
+        img1.src = './imagen1.jpg';
+        imagesContainer.appendChild(img1);
+        
+        const img2 = document.createElement('img');
+        img2.src = './imagen2.jpg';
+        imagesContainer.appendChild(img2);
+        
+        body.appendChild(imagesContainer);
+        
+        // Crear botón
+        const button = document.createElement('button');
+        button.textContent = 'Enviar';
+        body.appendChild(button);
+    });
+</script>
+</body>
+</html>

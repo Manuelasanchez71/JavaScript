@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+}
+
+form input, form select, form button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+form button:hover {
+    background-color: #4cae4c;
+}
+
+#userData {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+    <script>
+    
+        const form = document.createElement('form');
+        form.id = 'userForm';
+        
+        const nombreLabel = document.createElement('label');
+        nombreLabel.textContent = 'Nombre:';
+        form.appendChild(nombreLabel);
+        
+        const nombreInput = document.createElement('input');
+        nombreInput.type = 'text';
+        nombreInput.id = 'nombre';
+        nombreInput.name = 'nombre';
+        nombreInput.required = true;
+        form.appendChild(nombreInput);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const contrasenaLabel = document.createElement('label');
+        contrasenaLabel.textContent = 'Contraseña:';
+        form.appendChild(contrasenaLabel);
+        
+        const contrasenaInput = document.createElement('input');
+        contrasenaInput.type = 'password';
+        contrasenaInput.id = 'contrasena';
+        contrasenaInput.name = 'contrasena';
+        contrasenaInput.required = true;
+        form.appendChild(contrasenaInput);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const correoLabel = document.createElement('label');
+        correoLabel.textContent = 'Correo:';
+        form.appendChild(correoLabel);
+        
+        const correoInput = document.createElement('input');
+        correoInput.type = 'email';
+        correoInput.id = 'correo';
+        correoInput.name = 'correo';
+        correoInput.required = true;
+        form.appendChild(correoInput);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const edadLabel = document.createElement('label');
+        edadLabel.textContent = 'Edad:';
+        form.appendChild(edadLabel);
+        
+        const edadInput = document.createElement('input');
+        edadInput.type = 'number';
+        edadInput.id = 'edad';
+        edadInput.name = 'edad';
+        edadInput.required = true;
+        form.appendChild(edadInput);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const generoLabel = document.createElement('label');
+        generoLabel.textContent = 'Género:';
+        form.appendChild(generoLabel);
+        
+        const generoSelect = document.createElement('select');
+        generoSelect.id = 'genero';
+        generoSelect.name = 'genero';
+        generoSelect.required = true;
+        
+        const generoOption1 = document.createElement('option');
+        generoOption1.value = 'Masculino';
+        generoOption1.textContent = 'Masculino';
+        generoSelect.appendChild(generoOption1);
+        
+        const generoOption2 = document.createElement('option');
+        generoOption2.value = 'Femenino';
+        generoOption2.textContent = 'Femenino';
+        generoSelect.appendChild(generoOption2);
+        
+        const generoOption3 = document.createElement('option');
+        generoOption3.value = 'Otro';
+        generoOption3.textContent = 'Otro';
+        generoSelect.appendChild(generoOption3);
+        
+        form.appendChild(generoSelect);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const fechaNacimientoLabel = document.createElement('label');
+        fechaNacimientoLabel.textContent = 'Fecha de Nacimiento:';
+        form.appendChild(fechaNacimientoLabel);
+        
+        const fechaNacimientoInput = document.createElement('input');
+        fechaNacimientoInput.type = 'date';
+        fechaNacimientoInput.id = 'fecha_nacimiento';
+        fechaNacimientoInput.name = 'fecha_nacimiento';
+        fechaNacimientoInput.required = true;
+        form.appendChild(fechaNacimientoInput);
+        
+        form.appendChild(document.createElement('br'));
+        
+        const submitButton = document.createElement('button');
+        submitButton.type = 'submit';
+        submitButton.textContent = 'Registrar';
+        form.appendChild(submitButton);
+        
+        document.body.appendChild(form);
+        
+        
+        const userDataDiv = document.createElement('div');
+        userDataDiv.id = 'userData';
+        document.body.appendChild(userDataDiv);
+        
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const user = {
+                nombre: nombreInput.value,
+                contrasena: contrasenaInput.value,
+                correo: correoInput.value,
+                edad: edadInput.value,
+                genero: generoSelect.value,
+                fecha_nacimiento: fechaNacimientoInput.value
+            };
+        
+            localStorage.setItem('user', JSON.stringify(user));
+            displayUserData();
+        });
+        
+ 
+        function displayUserData() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            userDataDiv.innerHTML = '';
+        
+            if (user) {
+                const userDataTitle = document.createElement('h3');
+                userDataTitle.textContent = 'Datos del Usuario';
+                userDataDiv.appendChild(userDataTitle);
+        
+                const userDataList = document.createElement('ul');
+        
+                const nombreItem = document.createElement('li');
+                nombreItem.innerHTML = `<strong>Nombre:</strong> ${user.nombre}`;
+                userDataList.appendChild(nombreItem);
+        
+                const correoItem = document.createElement('li');
+                correoItem.innerHTML = `<strong>Correo:</strong> ${user.correo}`;
+                userDataList.appendChild(correoItem);
+        
+                const edadItem = document.createElement('li');
+                edadItem.innerHTML = `<strong>Edad:</strong> ${user.edad}`;
+                userDataList.appendChild(edadItem);
+        
+                const generoItem = document.createElement('li');
+                generoItem.innerHTML = `<strong>Género:</strong> ${user.genero}`;
+                userDataList.appendChild(generoItem);
+        
+                const fechaNacimientoItem = document.createElement('li');
+                fechaNacimientoItem.innerHTML = `<strong>Fecha de Nacimiento:</strong> ${user.fecha_nacimiento}`;
+                userDataList.appendChild(fechaNacimientoItem);
+        
+                userDataDiv.appendChild(userDataList);
+            } else {
+                userDataDiv.innerHTML = '<p>No hay datos de usuario registrados.</p>';
+            }
+        }
+        
+        
+        window.onload = displayUserData;
+        </script>
+</body>
+</html>
